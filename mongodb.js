@@ -15,27 +15,21 @@ MongoClient.connect(
     console.log('Connected to database!')
 
     const db = client.db(databaseName)
-    // db.collection('users').insertOne({
-    //   name: 'Marcelo',
-    //   age: 32
-    // })
-    db.collection('tasks').insertMany(
-      [
-        {
-          description: 'Work at LuizaLabs',
-          completed: false
-        },
-        {
-          description: 'Be the best I can in Java',
-          completed: false
-        }
-      ],
-      (error, result) => {
-        if (error) {
-          console.warn(`Couldn't save documents`)
-        }
-        console.log(result.ops)
+
+    db.collection('users').findOne({ name: 'Marcelo' }, (error, user) => {
+      if (error) {
+        console.warn('Unable to fetch data')
       }
-    )
+      console.log(user)
+    })
+
+    db.collection('tasks')
+      .find({ completed: false })
+      .count((error, tasks) => {
+        if (error) {
+          console.warn(error)
+        }
+        console.log(tasks)
+      })
   }
 )
