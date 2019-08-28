@@ -16,20 +16,18 @@ MongoClient.connect(
 
     const db = client.db(databaseName)
 
-    db.collection('users').findOne({ name: 'Marcelo' }, (error, user) => {
-      if (error) {
-        console.warn('Unable to fetch data')
-      }
-      console.log(user)
-    })
-
     db.collection('tasks')
-      .find({ completed: false })
-      .count((error, tasks) => {
-        if (error) {
-          console.warn(error)
+      .updateMany(
+        {
+          completed: false
+        },
+        {
+          $set: {
+            completed: true
+          }
         }
-        console.log(tasks)
-      })
+      )
+      .then(result => console.log(result))
+      .catch(error => console.log(error))
   }
 )
