@@ -7,11 +7,16 @@ mongoose.connect(connectionURL, {
   useCreateIndex: true
 })
 
+
 const Task = mongoose.model('Task', {
   description: {
-    type: String
+    type: String,
+    required: true,
+    trim: true
   },
   completed: {
-    type: Boolean
+    type: Boolean,
+    default: false
   }
 })
+
