@@ -4,5 +4,6 @@ const connectionURL = `mongodb://mmelo_dev:solhi1986@ds145563.mlab.com:45563/tas
 
 mongoose.connect(connectionURL, {
   useNewUrlParser: true,
-  useCreateIndex: true
+  useCreateIndex: true,
+  useFindAndModify: false
 })
